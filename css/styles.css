@@ -1,9 +1,10 @@
 body {
     min-height: 100vh;
+    background-color: white;
 }
 
 .ui.header {
-    padding: 8px;
+    padding: 5px;
     padding-left: 10.5px;
     color: white;
 }
@@ -18,4 +19,107 @@ body {
 .ui.header>.image+.content,
 .ui.header>img+.content {
     padding-left: 5px;
+}
+
+.form-range {
+    width: 100%;
+}
+
+i.icon {
+    margin-left: 3.5px;
+    font-size: 1.4rem;
+}
+
+.eRnhep {
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 30px 0px;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.horzx {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.ui.segment.horzx {
+    padding: 0px;
+}
+
+.nums {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+/*
+.horzx::-webkit-scrollbar {
+    display: none;
+}
+
+.horzx {
+    -ms-overflow-style: none;
+ 
+    scrollbar-width: none;
+
+}*/
+
+@media (max-width:768px) {
+    .horzx {
+        min-height: 300px;
+    }
+    .marg {
+        margin-bottom: 30px;
+    }
+    .form-range {
+        width: 75%;
+    }
+    .algorithm {
+        overflow-y: scroll;
+        height: 150px;
+    }
+    .algorithm::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .algorithm {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+    .ch {
+        margin-bottom: 60px;
+    }
+}
+
+@media (min-width:768px) {
+    .horzx {
+        min-height: 343px;
+    }
+    .content.algo {
+        overflow-y: scroll;
+        height: 150px;
+    }
+    .content.algo::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .content.algo {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
 }
