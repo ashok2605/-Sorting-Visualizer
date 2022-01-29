@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.7/components/icon.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -31,11 +31,11 @@
 
     <center>
         <div class="ui five item menu" style="overflow-x:auto;width:96%;margin-top:20px;margin-bottom:15px;">
-            <a class="item">Bubble </a>
-            <a class="item">Selection</a>
-            <a class="item ">Insertion</a>
-            <a class="item">Quick</a>
-            <a class="item">Merge</a>
+            <a class="item Bubble">Bubble </a>
+            <a class="item Selection">Selection</a>
+            <a class="item Insertion">Insertion</a>
+            <a class="item Quick">Quick</a>
+            <a class="item Merge">Merge</a>
 
         </div>
 
@@ -44,7 +44,7 @@
 
                 <div class="col-sm-2 " style="padding:5px;padding-top:8px;">
 
-                    <button type="button" style="width:100%;" class="btn btn-primary">
+                    <button type="button" id="random" style="width:100%;" class="btn btn-primary">
                         RANDOM
                      </button>
 
@@ -53,9 +53,9 @@
 
                 <div class="col-sm-8 " style="padding:5px;padding-top:8px; ">
 
-                    <input type="text" placeholder="Size" class="form-control" style="width:50px;display:inline-block;">
+                    <input type="number" placeholder="Size" id="size" class="form-control" style="width:70px;display:inline-block;">
 
-                    <input type="text" placeholder="Input" class="form-control" style="width:calc(100% - 60px);display:inline-block;">
+                    <input type="text" placeholder="Input" id="input" class="form-control" style="width:calc(100% - 80px);display:inline-block;">
 
                 </div>
 
@@ -75,7 +75,7 @@
     <div class="row" style="width:96%;padding:0px;margin:0px;margin-left:calc(2%); margin-right:calc(2%);margin-top:20px;margin-bottom:40px;">
         <div class="col-md-8 marg" style="padding:5px;">
             <div class="ui segment horzx">
-                <div class="ui segment" style="margin:0px;position:absolute;top:0px;">
+                <div class="ui segment" style="margin:0px;position:absolute;top:0px;left:0px;">
                     <b> Swaps : 100</b>
                 </div>
                 <div class="ui segment" style="margin:0px;position:absolute;top:0px;right:0px;">
@@ -84,22 +84,8 @@
 
                 <div class="nums">
 
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">10</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">12</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">13</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">2</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">5</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">6</div>
 
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">2</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">5</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">6</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">5</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">6</div>
 
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">2</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">5</div>
-                    <div class="sc-jRQAMF eRnhep" style="order: 0;">6</div>
 
                 </div>
 
@@ -109,7 +95,7 @@
 
             </div>
         </div>
-        <div class="col-md-4 ch" style="padding:5px;">
+        <div class="col-md-4 ch sortinfo" id="Bubble" style="padding:5px;">
             <div class="ui message">
                 <center>
                     <h3> Bubble Sort </h3>
@@ -117,10 +103,10 @@
 
             </div>
             <div class="ui styled accordion" style="width:100%;">
-                <div class=" title algo">
-                    <i class="clipboard icon"></i> Algorithm
+                <div class=" title algo active ">
+                    <i class="clipboard icon "></i> Algorithm
                 </div>
-                <div class=" content algo algorithm">
+                <div class=" content algo algorithm active">
                     <div class="ui message">
                         <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
                         <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
@@ -149,14 +135,296 @@
             </div>
 
         </div>
+        <div class="col-md-4 ch sortinfo" id="Selection" style="padding:5px;">
+            <div class="ui message">
+                <center>
+                    <h3> Selection Sort </h3>
+                </center>
+
+            </div>
+            <div class="ui styled accordion" style="width:100%;">
+                <div class=" title algo active">
+                    <i class="clipboard icon"></i> Algorithm
+                </div>
+                <div class=" content algo algorithm active">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+                <div class=" title">
+                    <i class="clock icon"></i> Time Complexity
+                </div>
+                <div class=" content algo">
+                    <div class="ui message">
+                        <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+                    </div>
+                </div>
+
+                <div class="title algo">
+                    <i class="space shuttle icon"></i> Space Complexity
+                </div>
+                <div class="content algo">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 ch sortinfo" id="Insertion" style="padding:5px;">
+            <div class="ui message">
+                <center>
+                    <h3> Insertion Sort </h3>
+                </center>
+
+            </div>
+            <div class="ui styled accordion" style="width:100%;">
+                <div class=" title algo active">
+                    <i class="clipboard icon"></i> Algorithm
+                </div>
+                <div class=" content algo algorithm active">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+                <div class=" title">
+                    <i class="clock icon"></i> Time Complexity
+                </div>
+                <div class=" content algo">
+                    <div class="ui message">
+                        <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+                    </div>
+                </div>
+
+                <div class="title algo">
+                    <i class="space shuttle icon"></i> Space Complexity
+                </div>
+                <div class="content algo">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 ch sortinfo" id="Quick" style="padding:5px;">
+            <div class="ui message">
+                <center>
+                    <h3> Quick Sort </h3>
+                </center>
+
+            </div>
+            <div class="ui styled accordion" style="width:100%;">
+                <div class=" title algo active">
+                    <i class="clipboard icon"></i> Algorithm
+                </div>
+                <div class=" content algo algorithm active">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+                <div class=" title">
+                    <i class="clock icon"></i> Time Complexity
+                </div>
+                <div class=" content algo">
+                    <div class="ui message">
+                        <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+                    </div>
+                </div>
+
+                <div class="title algo">
+                    <i class="space shuttle icon"></i> Space Complexity
+                </div>
+                <div class="content algo">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 ch sortinfo" id="Merge" style="padding:5px;">
+            <div class="ui message">
+                <center>
+                    <h3> Merge Sort </h3>
+                </center>
+
+            </div>
+            <div class="ui styled accordion" style="width:100%;">
+                <div class=" title algo active">
+                    <i class="clipboard icon"></i> Algorithm
+                </div>
+                <div class=" content algo algorithm active">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+                <div class=" title">
+                    <i class="clock icon"></i> Time Complexity
+                </div>
+                <div class=" content algo">
+                    <div class="ui message">
+                        <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+                    </div>
+                </div>
+
+                <div class="title algo">
+                    <i class="space shuttle icon"></i> Space Complexity
+                </div>
+                <div class="content algo">
+                    <div class="ui message">
+                        <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+                        <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps
+                            give a good home to a dog who may not find one so readily.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 
 
 
+
     <script>
+        function changeblocks() {
+            let k = document.querySelector("#input").value.split(",");
+            let innhtml = "";
+            for (let i = 0; i < k.length; i++) {
+                innhtml += `<div class="sc-jRQAMF eRnhep" style="order: 0;" id=${i} >${k[i]}</div>`;
+            }
+            document.querySelector(".horzx .nums").innerHTML = innhtml;
+
+        }
+
+
+
+        function changeinput(e) {
+            let k = e.target.value;
+            if (k === "") {
+                document.querySelector("#size").value = 0;
+                document.querySelector(".horzx .nums").innerHTML = "";
+                return;
+            }
+            let flag = 0;
+
+            if (k.substring(k.length - 1) === ",") {
+                k = k.substring(0, k.length - 1);
+                flag = 1;
+            }
+            k = k.replace(/^,+|,+$/g, '');
+
+
+            let arr = k.split(",");
+
+            let innhtml = "";
+            let val = "";
+            let b = 0;
+            for (let i = 0; i < arr.length; i++) {
+
+                if (!isNaN(arr[i])) {
+                    if (i === 0) {
+                        val = "" + arr[i];
+                    } else {
+                        val = val + "," + arr[i];
+                    }
+                    b += 1;
+                    document.querySelector("#size").value = b;
+
+                    innhtml += `<div class="sc-jRQAMF eRnhep" style="order: 0;" id=${i} >${arr[i]}</div>`;
+                } else {
+                    break;
+                }
+
+
+
+
+            }
+            if (flag === 1) {
+                val = val + ",";
+            }
+            document.querySelector("#input").value = val;
+            document.querySelector(".horzx .nums").innerHTML = innhtml;
+
+        }
+
+
+
+
+        function makeinvisible() {
+            document.querySelector("#Selection").style.display = "none";
+            document.querySelector("#Insertion").style.display = "none";
+            document.querySelector("#Quick").style.display = "none";
+            document.querySelector("#Merge").style.display = "none";
+            document.querySelector("#Bubble").style.display = "none";
+        }
+
+
         $(document).ready(function() {
             $('.ui.accordion').accordion();
+            makeinvisible();
+            document.querySelector("#Bubble").style.display = "initial";
+            document.querySelector(".Bubble").classList.add("active");
+
+            let a = document.querySelectorAll("a.item");
+
+            for (let i = 0; i < a.length; i++) {
+                a[i].addEventListener("click", function() {
+                    makeinvisible();
+                    var k = `#${this.classList[1]}`;
+                    document.querySelector(k).style.display = "initial";
+
+                })
+            }
+
+
+            $('#random').on('click', function() {
+                let a = document.querySelector("#size").value;
+                if (a === "") {
+                    alert("Size Required !! ")
+                } else {
+                    a = "" + a;
+
+                    if (a.indexOf(".") !== -1) {
+                        alert("Only Integer Values Are Allowed !!");
+                    } else {
+                        a = parseInt(a);
+                        let z = "";
+                        for (let i = 0; i < a - 1; i++) {
+                            z += Math.floor(100 + Math.random() * 900) + ",";
+                        }
+                        if (a !== 0) {
+                            z += Math.floor(100 + Math.random() * 900);
+                        }
+
+                        document.querySelector("#input").value = z;
+                        if (a !== 0) {
+                            changeblocks();
+                        }
+                    }
+                }
+            });
+
+
+            $("#input").on("input", changeinput);
+
+
         });
         $('.ui.menu a.item').on('click', function() {
             $(this)
