@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        @keyframes example {
+            0% {
+                animation-timing-function: ease-in-out;
+            }
+            25% {
+                transform: translate(100px, 0px);
+                animation-timing-function: ease-in-out;
+            }
+            75% {
+                transform: translate(100px, 200px);
+                animation-timing-function: ease-in-out;
+            }
+            100% {
+                transform: translate(0px, 200px);
+                animation-timing-function: ease-in-out;
+            }
+        }
+        
+        @keyframes exampl {
+            0% {
+                animation-timing-function: ease-in-out;
+            }
+            25% {
+                transform: translate(-100px, 0px);
+                animation-timing-function: ease-in-out;
+            }
+            75% {
+                transform: translate(-100px, -200px);
+                animation-timing-function: ease-in-out;
+            }
+            100% {
+                transform: translate(0px, -200px);
+                animation-timing-function: ease-in-out;
+            }
+        }
+        
+        .one {
+            animation-name: example;
+            animation-duration: 4s;
+        }
+        
+        .three {
+            animation-name: exampl;
+            animation-duration: 4s;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="one" style="height:100px;width:100px;background-color:yellow;position:relative;">
+
+        </div>
+        <div class="two" style="height:100px;width:100px;background-color:green;position:relative;">
+
+        </div>
+        <div class="three" style="height:100px;width:100px;background-color:red;position:relative;"></div>
+    </center>
+</body>
+
+</html>
