@@ -303,6 +303,7 @@
 
 
     <script>
+        //function for changing blocks with respect to random input
         function changeblocks() {
             let k = document.querySelector("#input").value.split(",");
             let innhtml = "";
@@ -314,7 +315,7 @@
         }
 
 
-
+        //function for changing blocks with respect to user input
         function changeinput(e) {
             let k = e.target.value;
             if (k === "") {
@@ -366,7 +367,7 @@
 
 
 
-
+        //function to make all algorithms content invisible 
         function makeinvisible() {
             document.querySelector("#Selection").style.display = "none";
             document.querySelector("#Insertion").style.display = "none";
