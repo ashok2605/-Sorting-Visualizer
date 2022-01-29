@@ -10,64 +10,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
     <style>
-        @keyframes example {
-            0% {
-                animation-timing-function: ease-in-out;
-            }
-            25% {
-                transform: translate(100px, 0px);
-                animation-timing-function: ease-in-out;
-            }
-            75% {
-                transform: translate(100px, 200px);
-                animation-timing-function: ease-in-out;
-            }
-            100% {
-                transform: translate(0px, 200px);
-                animation-timing-function: ease-in-out;
-            }
-        }
-        
-        @keyframes exampl {
-            0% {
-                animation-timing-function: ease-in-out;
-            }
-            25% {
-                transform: translate(-100px, 0px);
-                animation-timing-function: ease-in-out;
-            }
-            75% {
-                transform: translate(-100px, -200px);
-                animation-timing-function: ease-in-out;
-            }
-            100% {
-                transform: translate(0px, -200px);
-                animation-timing-function: ease-in-out;
-            }
-        }
-        
-        .one {
-            animation-name: example;
-            animation-duration: 4s;
-        }
-        
-        .three {
-            animation-name: exampl;
-            animation-duration: 4s;
-        }
+
     </style>
 </head>
 
 <body>
     <center>
-        <div class="one" style="height:100px;width:100px;background-color:yellow;position:relative;">
+
+        <div class="two" style="height:100px;width:100px;position:relative;">
+            40
+        </div>
+        <div style="height:100px;width:100px;position:relative;">
 
         </div>
-        <div class="two" style="height:100px;width:100px;background-color:green;position:relative;">
 
-        </div>
-        <div class="three" style="height:100px;width:100px;background-color:red;position:relative;"></div>
+        <div class="four" style="height:100px;width:100px;position:relative;">20</div>
+        <button type="button" id="animate">Animate</button>
     </center>
+    <script>
+        document.querySelector("#animate").addEventListener("click", function(e) {
+
+            document.querySelector(".two").animate([
+                // keyframes
+                {
+                    transform: 'translate(0px,0px)'
+                }, {
+                    transform: 'translate(100px,0px)'
+                }, {
+                    transform: 'translate(100px,200px)'
+                }, {
+                    transform: 'translate(0px,200px)'
+                }
+            ], {
+                // timing options
+                duration: 4000,
+
+            });
+            document.querySelector(".four").animate([
+                // keyframes
+                {
+                    transform: 'translate(0px,0px)'
+                }, {
+                    transform: 'translate(-100px,0px)'
+                }, {
+                    transform: 'translate(-100px,-200px)'
+                }, {
+                    transform: 'translate(0px,-200px)'
+                }
+            ], {
+                // timing options
+                duration: 4000,
+
+            });
+            setTimeout(function() {
+                let a = document.querySelector(".four").innerHTML;
+                let b = document.querySelector(".two").innerHTML
+                document.querySelector(".two").innerHTML = a;
+                document.querySelector(".four").innerHTML = b;
+            }, 4000);
+        });
+    </script>
 </body>
 
 </html>
