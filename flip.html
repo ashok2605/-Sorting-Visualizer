@@ -10,65 +10,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
     <style>
-
+        .disp{
+            height:100px;
+            width:100px;
+            display:inline-block;
+        }
     </style>
 </head>
 
 <body>
     <center>
+        <br><br><br><br><br><br><br>
+        <div class="disp" id="0">10</div>
+        <div class="disp"  id="1">2</div>
+        <div  class="disp" id="2">5</div>
+        <div class="disp"  id="3">4</div>
+        <div class="disp"  id="4">100</div>
+        <div class="disp"  id="5">29</div>
+        <div class="disp"  id="6">3</div>
+        <div class="disp"  id="7">10</div>
 
-        <div class="two" style="height:100px;width:100px;position:relative;">
-            40
-        </div>
-        <div style="height:100px;width:100px;position:relative;">
 
-        </div>
-
-        <div class="four" style="height:100px;width:100px;position:relative;">20</div>
         <button type="button" id="animate">Animate</button>
     </center>
     <script>
         document.querySelector("#animate").addEventListener("click", function(e) {
+            alert("hi");
+            let arr=[];
+            let k=document.querySelectorAll(".disp");
+            for(let i=0;i<k.length;i++){
+                arr.push(parseInt(k[i].innerHTML));
+            }
+            alert(arr);
+            startbubblesort(arr,1);
+            console.log("k");
+         
 
-            document.querySelector(".two").animate([
-                // keyframes
-                {
-                    transform: 'translate(0px,0px)'
-                }, {
-                    transform: 'translate(100px,0px)'
-                }, {
-                    transform: 'translate(100px,200px)'
-                }, {
-                    transform: 'translate(0px,200px)'
-                }
-            ], {
-                // timing options
-                duration: 4000,
+         
 
-            });
-            document.querySelector(".four").animate([
-                // keyframes
-                {
-                    transform: 'translate(0px,0px)'
-                }, {
-                    transform: 'translate(-100px,0px)'
-                }, {
-                    transform: 'translate(-100px,-200px)'
-                }, {
-                    transform: 'translate(0px,-200px)'
-                }
-            ], {
-                // timing options
-                duration: 4000,
-
-            });
-            setTimeout(function() {
-                let a = document.querySelector(".four").innerHTML;
-                let b = document.querySelector(".two").innerHTML
-                document.querySelector(".two").innerHTML = a;
-                document.querySelector(".four").innerHTML = b;
-            }, 4000);
+           
         });
+        const sleep = (milliseconds) => {
+            return new Promise(resolve => setTimeout(resolve, milliseconds))
+          }
+
+        async function startbubblesort(array,delay){
+            for(let i=array.length-1;i>=0;i--){
+                for(let j=0;j<i;j++){
+                 if(parseInt(document.getElementById(""+j).innerHTML)> parseInt(document.getElementById(""+(j+1)).innerHTML)){
+           
+                   
+                    document.getElementById(""+j).animate([
+                    // keyframes
+                    {
+                        transform: 'translate(0px,0px)'
+                    }, {
+                        transform: 'translate(0px,100px)'
+                    }, {
+                        transform: 'translate(100px,100px)'
+                    }, {
+                        transform: 'translate(100px,0px)'
+                    }
+                ], {
+                    // timing options
+                    duration: delay*1000,
+    
+                });
+                document.getElementById(""+(j+1)).animate([
+                    // keyframes
+                    {
+                        transform: 'translate(0px,0px)'
+                    }, {
+                        transform: 'translate(0px,-100px)'
+                    }, {
+                        transform: 'translate(-100px,-100px)'
+                    }, {
+                        transform: 'translate(-100px,0px)'
+                    }
+                ], {
+                    // timing options
+                    duration: delay*1000,
+    
+                });
+                setTimeout(function() {
+                    let a = document.getElementById(""+(j+1)).innerHTML;
+                    let b = document.getElementById(""+j).innerHTML;
+                    document.getElementById(""+j).innerHTML = a;
+                    document.getElementById(""+(j+1)).innerHTML = b;
+                }, delay*1000);
+                     await sleep(delay*1100) ;
+                 }
+                }
+            }
+            alert(array);
+         
+        }
+
+
+
     </script>
 </body>
 
