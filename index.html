@@ -61,11 +61,14 @@
 
                 <div class="col-sm-2 " style="padding:5px; ">
 
-                    <input type="range" class="form-range" min="0" max="5" step="1" id="customRange3">
+                    <input type="range" class="form-range" min="1" max="5" step="1" id="customRange3">
 
-                    <i class="play icon"></i>
-
-                    <i class="redo  icon"></i>
+                    <div class="ui icon sort" data-content="Sort" data-variation="inverted">
+                        <i class="play icon"></i>
+                    </div>
+                    <div class="ui icon reset" data-content="Reset" data-variation="inverted">
+                        <i class="redo icon"></i>
+                    </div>
 
                 </div>
             </div>
@@ -75,10 +78,10 @@
     <div class="row" style="width:96%;padding:0px;margin:0px;margin-left:calc(2%); margin-right:calc(2%);margin-top:20px;margin-bottom:40px;">
         <div class="col-md-8 marg" style="padding:5px;position:relative;">
             <div class="ui segment" style="margin:0px;position:absolute;top:5px;left:5px;z-index:10;border-radius:0px;">
-                <b> Swaps : 100</b>
+                <b> Swaps : <span class="swaps">0</span></b>
             </div>
             <div class="ui segment" style="margin:0px;position:absolute;top:5px;right:5px;z-index:10;border-radius:0px;">
-                <b> Comparisons : 100</b>
+                <b> Comparisons : <span class="comparisons">0</span></b>
             </div>
             <div class="ui segment horzx">
 
@@ -303,137 +306,7 @@
 
 
 
-    <script>
-        //function for changing blocks with respect to random input
-        function changeblocks() {
-            let k = document.querySelector("#input").value.split(",");
-            let innhtml = "";
-            for (let i = 0; i < k.length; i++) {
-                innhtml += `<div class="sc-jRQAMF eRnhep" style="order: 0;" id=${i} >${k[i]}</div>`;
-            }
-            document.querySelector(".horzx .nums").innerHTML = innhtml;
-
-        }
-
-
-        //function for changing blocks with respect to user input
-        function changeinput(e) {
-            let k = e.target.value;
-            if (k === "") {
-                document.querySelector("#size").value = 0;
-                document.querySelector(".horzx .nums").innerHTML = "";
-                return;
-            }
-            let flag = 0;
-
-            if (k.substring(k.length - 1) === ",") {
-                k = k.substring(0, k.length - 1);
-                flag = 1;
-            }
-            k = k.replace(/^,+|,+$/g, '');
-
-
-            let arr = k.split(",");
-
-            let innhtml = "";
-            let val = "";
-            let b = 0;
-            for (let i = 0; i < arr.length; i++) {
-
-                if (!isNaN(arr[i])) {
-                    if (i === 0) {
-                        val = "" + arr[i];
-                    } else {
-                        val = val + "," + arr[i];
-                    }
-                    b += 1;
-                    document.querySelector("#size").value = b;
-
-                    innhtml += `<div class="sc-jRQAMF eRnhep" style="order: 0;" id=${i} >${arr[i]}</div>`;
-                } else {
-                    break;
-                }
-
-
-
-
-            }
-            if (flag === 1) {
-                val = val + ",";
-            }
-            document.querySelector("#input").value = val;
-            document.querySelector(".horzx .nums").innerHTML = innhtml;
-
-        }
-
-
-
-        //function to make all algorithms content invisible 
-        function makeinvisible() {
-            document.querySelector("#Selection").style.display = "none";
-            document.querySelector("#Insertion").style.display = "none";
-            document.querySelector("#Quick").style.display = "none";
-            document.querySelector("#Merge").style.display = "none";
-            document.querySelector("#Bubble").style.display = "none";
-        }
-
-
-        $(document).ready(function() {
-            $('.ui.accordion').accordion();
-            makeinvisible();
-            document.querySelector("#Bubble").style.display = "initial";
-            document.querySelector(".Bubble").classList.add("active");
-
-            let a = document.querySelectorAll("a.item");
-
-            for (let i = 0; i < a.length; i++) {
-                a[i].addEventListener("click", function() {
-                    makeinvisible();
-                    var k = `#${this.classList[1]}`;
-                    document.querySelector(k).style.display = "initial";
-
-                })
-            }
-
-
-            $('#random').on('click', function() {
-                let a = document.querySelector("#size").value;
-                if (a === "") {
-                    alert("Size Required !! ")
-                } else {
-                    a = "" + a;
-
-                    if (a.indexOf(".") !== -1) {
-                        alert("Only Integer Values Are Allowed !!");
-                    } else {
-                        a = parseInt(a);
-                        let z = "";
-                        for (let i = 0; i < a - 1; i++) {
-                            z += Math.floor(100 + Math.random() * 900) + ",";
-                        }
-                        if (a !== 0) {
-                            z += Math.floor(100 + Math.random() * 900);
-                        }
-
-                        document.querySelector("#input").value = z;
-                        if (a !== 0) {
-                            changeblocks();
-                        }
-                    }
-                }
-            });
-
-
-            $("#input").on("input", changeinput);
-
-
-        });
-        $('.ui.menu a.item').on('click', function() {
-            $(this)
-                .addClass('active')
-                .siblings()
-                .removeClass('active');
-        })
+    <script src="./index.js">
     </script>
 </body>
 
