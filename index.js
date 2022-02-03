@@ -15,7 +15,7 @@
 
 
   document.querySelector(".form-range").addEventListener("change", function(e) {
-      delay = 1200 - 200 * parseInt(e.target.value);
+      comparisonspeed = 1200 - 200 * parseInt(e.target.value);
 
       delay = 6 - parseInt(e.target.value);
   });
@@ -700,6 +700,11 @@
 
 
   $(document).ready(function() {
+      document.querySelector("#input").value = "15,14,13,12,11,10,9,8,7,6,5,4,3,2,1";
+      let obj = {
+          target: document.querySelector("#input")
+      };
+      changeinput(obj);
       $('.ui.accordion').accordion();
       makeinvisible();
       document.querySelector("#Bubble").style.display = "initial";
