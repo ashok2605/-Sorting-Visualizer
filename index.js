@@ -4,16 +4,25 @@
   let delay = 3;
   let comparisonspeed = 600;
   let reset_clicked = false;
+  let first = null;
+  let last = null;
 
 
   $('.ui.icon')
       .popup();
+
+
+
 
   document.querySelector(".form-range").addEventListener("change", function(e) {
       delay = 1200 - 200 * parseInt(e.target.value);
 
       delay = 6 - parseInt(e.target.value);
   });
+
+
+
+
 
   function changeblocks() {
       let k = document.querySelector("#input").value.split(",");
@@ -26,7 +35,10 @@
   }
 
 
-  //function for changing blocks with respect to user input
+
+
+
+
   function changeinput(e) {
 
       let k = e.target.value;
@@ -82,90 +94,104 @@
       document.querySelector(".horzx .nums").innerHTML = innhtml;
 
   }
+
+
+
+
+
   const sleep = (milliseconds) => {
       return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
+
+
+
+
+
   function bubbleresolveAfter400milliSeconds(a, b) {
       return new Promise(resolve => {
+          if (flag === 1 && sort_algo_index === 0 && reset_clicked === false) {
+              document.getElementById("" + a).style.backgroundColor = "red";
+              document.getElementById("" + b).style.backgroundColor = "red";
 
-          document.getElementById("" + a).style.backgroundColor = "red";
-          document.getElementById("" + b).style.backgroundColor = "red";
+              setTimeout(() => {
 
-          setTimeout(() => {
+                  document.getElementById("" + a).style.backgroundColor = "white";
+                  document.getElementById("" + b).style.backgroundColor = "white";
+                  resolve(parseInt(document.getElementById("" + a).innerHTML) > parseInt(document.getElementById("" + (b)).innerHTML));
 
-              document.getElementById("" + a).style.backgroundColor = "white";
-              document.getElementById("" + b).style.backgroundColor = "white";
-              resolve(parseInt(document.getElementById("" + a).innerHTML) > parseInt(document.getElementById("" + (b)).innerHTML));
-
-          }, comparisonspeed);
+              }, comparisonspeed);
+          }
       });
   }
-  let first = null;
-  let last = null;
+
+
+
   async function startbubblesort() {
       for (let i = document.querySelector(".nums").childNodes.length - 1; i >= 0; i--) {
+
+
           for (let j = 0; j < i; j++) {
-              if (flag === 0) {
-                  return;
-              }
 
 
               if (flag === 1 && sort_algo_index === 0 && reset_clicked === false) {
                   document.querySelector(".comparisons").innerHTML = "" + (parseInt(document.querySelector(".comparisons").innerHTML) + 1);
                   if (await bubbleresolveAfter400milliSeconds(j, j + 1)) {
+
                       first = j + 1;
                       last = j
+                      if (flag === 1 && sort_algo_index === 0 && reset_clicked === false) {
 
-                      document.getElementById("" + (j + 1)).style.backgroundColor = "yellow";
-                      document.getElementById("" + j).style.backgroundColor = "yellow";
+                          document.getElementById("" + (j + 1)).style.backgroundColor = "yellow";
+                          document.getElementById("" + j).style.backgroundColor = "yellow";
 
-                      document.getElementById("" + j).animate([
-                          // keyframes
-                          {
-                              transform: 'translate(0px,0px)'
-                          }, {
-                              transform: 'translate(0px,50px)'
-                          }, {
-                              transform: 'translate(50px,50px)'
-                          }, {
-                              transform: 'translate(50px,0px)'
-                          }
-                      ], {
-                          // timing options
-                          duration: delay * 1000,
+                          document.getElementById("" + j).animate([
+                              // keyframes
+                              {
+                                  transform: 'translate(0px,0px)'
+                              }, {
+                                  transform: 'translate(0px,50px)'
+                              }, {
+                                  transform: 'translate(50px,50px)'
+                              }, {
+                                  transform: 'translate(50px,0px)'
+                              }
+                          ], {
+                              // timing options
+                              duration: delay * 1000,
 
-                      });
-                      document.getElementById("" + (j + 1)).animate([
-                          // keyframes
-                          {
-                              transform: 'translate(0px,0px)'
-                          }, {
-                              transform: 'translate(0px,-50px)'
-                          }, {
-                              transform: 'translate(-50px,-50px)'
-                          }, {
-                              transform: 'translate(-50px,0px)'
-                          }
-                      ], {
-                          // timing options
-                          duration: delay * 1000,
+                          });
+                          document.getElementById("" + (j + 1)).animate([
+                              // keyframes
+                              {
+                                  transform: 'translate(0px,0px)'
+                              }, {
+                                  transform: 'translate(0px,-50px)'
+                              }, {
+                                  transform: 'translate(-50px,-50px)'
+                              }, {
+                                  transform: 'translate(-50px,0px)'
+                              }
+                          ], {
+                              // timing options
+                              duration: delay * 1000,
 
-                      });
-                      setTimeout(function() {
+                          });
+                          setTimeout(function() {
 
 
-                          if (flag === 1 && sort_algo_index === 0) {
-                              document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
-                              document.getElementById("" + (j + 1)).style.backgroundColor = "white";
-                              document.getElementById("" + j).style.backgroundColor = "white";
-                              let a = document.getElementById("" + (j + 1)).innerHTML;
-                              let b = document.getElementById("" + j).innerHTML;
-                              document.getElementById("" + j).innerHTML = a;
-                              document.getElementById("" + (j + 1)).innerHTML = b;
-                          }
-                      }, delay * 1000);
-                      await sleep(delay * 1000 + 200);
+                              if (flag === 1 && sort_algo_index === 0 && reset_clicked === false) {
+                                  document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
+                                  document.getElementById("" + (j + 1)).style.backgroundColor = "white";
+                                  document.getElementById("" + j).style.backgroundColor = "white";
+                                  let a = document.getElementById("" + (j + 1)).innerHTML;
+                                  let b = document.getElementById("" + j).innerHTML;
+                                  document.getElementById("" + j).innerHTML = a;
+                                  document.getElementById("" + (j + 1)).innerHTML = b;
+                              }
+                          }, delay * 1000);
+                          await sleep(delay * 1000 + 200);
+                      }
                   }
 
               }
@@ -178,17 +204,28 @@
       }
   }
 
+
+
+
+
   function selectionresolveAfter400milliSeconds(a, b) {
       return new Promise(resolve => {
-          document.getElementById("" + a).style.backgroundColor = "red";
-          document.getElementById("" + b).style.backgroundColor = "red";
-          setTimeout(() => {
-              document.getElementById("" + a).style.backgroundColor = "white";
-              document.getElementById("" + b).style.backgroundColor = "white";
-              resolve(parseInt(document.getElementById("" + a).innerHTML) < parseInt(document.getElementById("" + (b)).innerHTML));
-          }, comparisonspeed);
+          if (flag === 1 && sort_algo_index === 1 && reset_clicked === false) {
+              document.getElementById("" + a).style.backgroundColor = "red";
+              document.getElementById("" + b).style.backgroundColor = "red";
+              setTimeout(() => {
+                  document.getElementById("" + a).style.backgroundColor = "white";
+                  document.getElementById("" + b).style.backgroundColor = "white";
+                  resolve(parseInt(document.getElementById("" + a).innerHTML) < parseInt(document.getElementById("" + (b)).innerHTML));
+
+              }, comparisonspeed);
+          }
       });
   }
+
+
+
+
   async function startselectionsort() {
 
       for (var i = 0; i < document.querySelector(".nums").childNodes.length; i++) {
@@ -210,6 +247,8 @@
               }
               if (flag === 1 && sort_algo_index === 1 && reset_clicked === false) {
                   if (min_idx !== i) {
+                      first = min_idx;
+                      last = i;
                       document.getElementById("" + (min_idx)).style.backgroundColor = "yellow";
                       document.getElementById("" + i).style.backgroundColor = "yellow";
                       document.getElementById("" + i).animate([
@@ -278,22 +317,132 @@
       }
 
 
+
   }
 
+
+  function insertionresolveAfter400milliSeconds(a, b) {
+      return new Promise(resolve => {
+          if (flag === 1 && sort_algo_index === 2 && reset_clicked === false) {
+
+              document.getElementById("" + a).style.backgroundColor = "red";
+              document.getElementById("" + b).style.backgroundColor = "red";
+
+
+              setTimeout(() => {
+
+                  document.getElementById("" + a).style.backgroundColor = "white";
+                  document.getElementById("" + b).style.backgroundColor = "white";
+                  resolve(parseInt(document.getElementById("" + a).innerHTML) > parseInt(document.getElementById("" + (b)).innerHTML));
+
+              }, comparisonspeed);
+          }
+      });
+  }
+
+
+
   async function startinsertionsort() {
-      alert("Inside insertion sort");
+      for (let i = 1; i < document.querySelector(".nums").childNodes.length; i++) {
+
+
+
+
+          for (let j = i - 1; j >= 0 && await insertionresolveAfter400milliSeconds(j, j + 1); j--) {
+              if (flag === 1 && sort_algo_index === 2 && reset_clicked === false) {
+                  document.querySelector(".comparisons").innerHTML = "" + (parseInt(document.querySelector(".comparisons").innerHTML) + 1);
+
+
+
+
+                  first = j;
+                  last = j + 1;
+                  document.getElementById("" + (j + 1)).style.backgroundColor = "yellow";
+                  document.getElementById("" + j).style.backgroundColor = "yellow";
+                  document.getElementById("" + j).animate([
+                      // keyframes
+                      {
+                          transform: 'translate(0px,0px)'
+                      }, {
+                          transform: 'translate(0px,50px)'
+                      }, {
+                          transform: 'translate(50px,50px)'
+                      }, {
+                          transform: 'translate(50px,0px)'
+                      }
+                  ], {
+                      // timing options
+                      duration: delay * 1000,
+
+                  });
+                  document.getElementById("" + (j + 1)).animate([
+                      // keyframes
+                      {
+                          transform: 'translate(0px,0px)'
+                      }, {
+                          transform: 'translate(0px,-50px)'
+                      }, {
+                          transform: 'translate(-50px,-50px)'
+                      }, {
+                          transform: 'translate(-50px,0px)'
+                      }
+                  ], {
+                      // timing options
+                      duration: delay * 1000,
+
+                  });
+                  setTimeout(function() {
+
+
+                      if (flag === 1 && sort_algo_index === 2 && reset_clicked === false) {
+                          document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
+                          document.getElementById("" + (j + 1)).style.backgroundColor = "white";
+                          document.getElementById("" + j).style.backgroundColor = "white";
+                          let a = document.getElementById("" + (j + 1)).innerHTML;
+                          let b = document.getElementById("" + j).innerHTML;
+                          document.getElementById("" + j).innerHTML = a;
+                          document.getElementById("" + (j + 1)).innerHTML = b;
+                      }
+                  }, delay * 1000);
+                  await sleep(delay * 1000 + 200);
+              }
+          }
+          if (flag === 1 && sort_algo_index === 2 && reset_clicked === false) {
+              for (let k = i; k >= 0; k--) {
+                  document.getElementById("" + (k)).style.backgroundColor = "green";
+              }
+          }
+      }
+  }
+
+
+
+
+
+
+
+
+
+  async function startquicksort() {
+      alert("Insidequick sort");
       alert(delay);
   }
+
+
+
+
+
+
 
   async function startmergesort() {
       alert("Inside merge sort");
       alert(delay);
   }
 
-  async function startquicksort() {
-      alert("Insidequick sort");
-      alert(delay);
-  }
+
+
+
+
   $(".ui.icon.sort").on("click", function(e) {
       document.querySelector(".ui.icon.reset").style.opacity = "1";
       document.querySelector(".ui.icon.reset").style.display = "inline-block";
@@ -345,6 +494,11 @@
 
 
   });
+
+
+
+
+
   $(".ui.icon.reset").on("click", async function(e) {
       if (flag === 1) {
           this.style.opacity = "0.3";
@@ -368,7 +522,10 @@
       }
 
 
-  })
+  });
+
+
+
 
   //function to make all algorithms content invisible 
   function makeinvisible() {
@@ -378,6 +535,8 @@
       document.querySelector("#Merge").style.display = "none";
       document.querySelector("#Bubble").style.display = "none";
   }
+
+
 
 
   $(document).ready(function() {
@@ -435,6 +594,9 @@
       }
 
 
+
+
+
       $('#random').on('click', function() {
           if (flag == 0) {
               let a = document.querySelector("#size").value;
@@ -475,9 +637,11 @@
 
 
   });
+
+
   $('.ui.menu a.item').on('click', function() {
       $(this)
           .addClass('active')
           .siblings()
           .removeClass('active');
-  })
+  });
