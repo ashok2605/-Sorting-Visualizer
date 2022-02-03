@@ -3,6 +3,7 @@
   let flag = 0;
   let delay = 3;
   let comparisonspeed = 600;
+  let reset_clicked = false;
 
 
   $('.ui.icon')
@@ -87,21 +88,35 @@
 
   function bubbleresolveAfter400milliSeconds(a, b) {
       return new Promise(resolve => {
+
           document.getElementById("" + a).style.backgroundColor = "red";
           document.getElementById("" + b).style.backgroundColor = "red";
+
           setTimeout(() => {
+
               document.getElementById("" + a).style.backgroundColor = "white";
               document.getElementById("" + b).style.backgroundColor = "white";
               resolve(parseInt(document.getElementById("" + a).innerHTML) > parseInt(document.getElementById("" + (b)).innerHTML));
+
           }, comparisonspeed);
       });
   }
+  let first = null;
+  let last = null;
   async function startbubblesort() {
       for (let i = document.querySelector(".nums").childNodes.length - 1; i >= 0; i--) {
           for (let j = 0; j < i; j++) {
-              if (flag === 1) {
+              if (flag === 0) {
+                  return;
+              }
+
+
+              if (flag === 1 && sort_algo_index === 0 && reset_clicked === false) {
                   document.querySelector(".comparisons").innerHTML = "" + (parseInt(document.querySelector(".comparisons").innerHTML) + 1);
                   if (await bubbleresolveAfter400milliSeconds(j, j + 1)) {
+                      first = j + 1;
+                      last = j
+
                       document.getElementById("" + (j + 1)).style.backgroundColor = "yellow";
                       document.getElementById("" + j).style.backgroundColor = "yellow";
 
@@ -138,7 +153,9 @@
 
                       });
                       setTimeout(function() {
-                          if (flag === 1) {
+
+
+                          if (flag === 1 && sort_algo_index === 0) {
                               document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
                               document.getElementById("" + (j + 1)).style.backgroundColor = "white";
                               document.getElementById("" + j).style.backgroundColor = "white";
@@ -150,11 +167,14 @@
                       }, delay * 1000);
                       await sleep(delay * 1000 + 200);
                   }
+
               }
           }
-          if (flag === 1) {
+
+          if (flag === 1 && sort_algo_index === 0 && reset_clicked === false) {
               document.getElementById("" + i).style.backgroundColor = "green";
           }
+
       }
   }
 
@@ -173,13 +193,13 @@
 
       for (var i = 0; i < document.querySelector(".nums").childNodes.length; i++) {
           var min_idx = i;
-          if (flag === 1) {
+          if (flag === 1 && sort_algo_index === 1 && reset_clicked === false) {
               if (i === document.querySelector(".nums").childNodes.length - 1) {
                   document.getElementById("" + i).style.backgroundColor = "green";
               }
 
               for (var j = i + 1; j < document.querySelector(".nums").childNodes.length; j++) {
-                  if (flag === 1) {
+                  if (flag === 1 && sort_algo_index === 1 && reset_clicked === false) {
                       document.querySelector(".comparisons").innerHTML = "" + (parseInt(document.querySelector(".comparisons").innerHTML) + 1);
 
 
@@ -188,7 +208,7 @@
                       }
                   }
               }
-              if (flag === 1) {
+              if (flag === 1 && sort_algo_index === 1 && reset_clicked === false) {
                   if (min_idx !== i) {
                       document.getElementById("" + (min_idx)).style.backgroundColor = "yellow";
                       document.getElementById("" + i).style.backgroundColor = "yellow";
@@ -229,7 +249,7 @@
                       });
 
                       setTimeout(function() {
-                          if (flag === 1) {
+                          if (flag === 1 && sort_algo_index === 1 && reset_clicked === false) {
 
                               document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
                               document.getElementById("" + (min_idx)).style.backgroundColor = "white";
@@ -247,6 +267,7 @@
 
                       await sleep(delay * 1000 + 200);
                   } else {
+
                       document.getElementById("" + i).style.backgroundColor = "green";
                   }
 
@@ -274,8 +295,12 @@
       alert(delay);
   }
   $(".ui.icon.sort").on("click", function(e) {
+      document.querySelector(".ui.icon.reset").style.opacity = "1";
+      document.querySelector(".ui.icon.reset").style.display = "inline-block";
+      document.querySelector(".redo.icon").style.display = "inline-block";
       // alert(sort_algo_index);
       flag = 1;
+      reset_clicked = false;
       //alert(flag);
 
       if (document.querySelector("#input").value === "") {
@@ -312,6 +337,7 @@
           case 4:
               {
                   startmergesort();
+                  break;
 
               }
 
@@ -319,18 +345,28 @@
 
 
   });
-  $(".ui.icon.reset").on("click", function(e) {
-      flag = 0;
-      let obj = {
-          target: document.querySelector("#input")
-      };
-      changeinput(obj);
-      document.querySelector(".swaps").innerHTML = "" + 0;
-      document.querySelector(".comparisons").innerHTML = "" + 0;
-      document.querySelector("#size").readOnly = false;
-      document.querySelector("#input").readOnly = false;
-      document.querySelector(".ui.icon.sort").style.display = "inline-block";
-      document.querySelector(".play.icon").style.display = "inline-block";
+  $(".ui.icon.reset").on("click", async function(e) {
+      if (flag === 1) {
+          this.style.opacity = "0.3";
+          reset_clicked = true;
+          alert(`wait for ${delay} seconds`);
+
+          await sleep(delay * 1000);
+
+          flag = 0;
+          let obj = {
+              target: document.querySelector("#input")
+          };
+          changeinput(obj);
+          document.querySelector(".swaps").innerHTML = "" + 0;
+          document.querySelector(".comparisons").innerHTML = "" + 0;
+          document.querySelector("#size").readOnly = false;
+          document.querySelector("#input").readOnly = false;
+          e.target.style.display = "none";
+          document.querySelector(".ui.icon.sort").style.display = "inline-block";
+          document.querySelector(".play.icon").style.display = "inline-block";
+      }
+
 
   })
 
@@ -362,11 +398,27 @@
                   target: document.querySelector("#input")
               };
               sort_algo_index = i;
+              reset_clicked = false;
+              flag = 0;
+              if (first !== null) {
+                  $("#" + first).stop(true);
+                  document.getElementById("" + first).style.backgroundColor = "white";
+                  first = null;
+              }
+              if (last !== null) {
+                  $("#" + last).stop(true);
+                  document.getElementById("" + last).style.backgroundColor = "white";
+                  last = null;
+              }
+
+              document.querySelector(".ui.icon.sort").style.opacity = "1";
 
               changeinput(obj);
 
               document.querySelector(".ui.icon.sort").style.display = "inline-block";
               document.querySelector(".play.icon").style.display = "inline-block";
+              document.querySelector(".ui.icon.reset").style.display = "none";
+
               document.querySelector("#size").readOnly = false;
               document.querySelector("#input").readOnly = false;
               document.querySelector(".swaps").innerHTML = "" + 0;
