@@ -791,7 +791,7 @@
       if (flag === 1) {
           this.style.opacity = "0.3";
           reset_clicked = true;
-          alert(`wait for ${delay} seconds`);
+          alert(`Wait for ${delay}sec `);
 
           await sleep(delay * 1000);
 
