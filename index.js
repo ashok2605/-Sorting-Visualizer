@@ -417,15 +417,165 @@
 
 
 
+  function quickresolveAfter400milliSeconds(a, b) {
+      return new Promise(resolve => {
+          if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+              document.getElementById("" + a).style.backgroundColor = "red";
+              document.getElementById("" + b).style.backgroundColor = "red";
+              setTimeout(() => {
+                  document.getElementById("" + a).style.backgroundColor = "white";
+                  document.getElementById("" + b).style.backgroundColor = "white";
+                  resolve(parseInt(document.getElementById("" + a).innerHTML) < parseInt(document.getElementById("" + (b)).innerHTML));
+
+              }, comparisonspeed);
+          }
+      });
+  }
+
+  async function partition(low, high) {
+      if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+          let x = low - 1;
+          for (let i = low; i < high; i++) {
+
+              if (await quickresolveAfter400milliSeconds(i, high)) {
+                  if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+                      document.querySelector(".comparisons").innerHTML = "" + (parseInt(document.querySelector(".comparisons").innerHTML) + 1);
+                      x++;
+                      if (x != i) {
+                          let xx = (i - x) * 50;
+                          let yy = (-1) * xx;
+                          first = x;
+                          last = i;
+                          document.getElementById("" + (x)).style.backgroundColor = "yellow";
+                          document.getElementById("" + i).style.backgroundColor = "yellow";
+                          document.getElementById("" + x).animate([
+                              // keyframes
+                              {
+                                  transform: 'translate(0px,0px)'
+                              }, {
+                                  transform: 'translate(0px,50px)'
+                              }, {
+                                  transform: `translate(${xx}px,50px)`
+                              }, {
+                                  transform: `translate(${xx}px,0px)`
+                              }
+                          ], {
+                              // timing options
+                              duration: delay * 1000,
+
+                          });
+                          document.getElementById("" + (i)).animate([
+                              // keyframes
+                              {
+                                  transform: 'translate(0px,0px)'
+                              }, {
+                                  transform: 'translate(0px,-50px)'
+                              }, {
+                                  transform: `translate(${yy}px,-50px)`
+                              }, {
+                                  transform: `translate(${yy}px,0px)`
+                              }
+                          ], {
+                              // timing options
+                              duration: delay * 1000,
+
+                          });
+                          setTimeout(function() {
+                              if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+                                  document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
+                                  document.getElementById("" + (x)).style.backgroundColor = "white";
+                                  document.getElementById("" + i).style.backgroundColor = "white";
+                                  let a = document.getElementById("" + (i)).innerHTML;
+                                  let b = document.getElementById("" + x).innerHTML;
+                                  document.getElementById("" + x).innerHTML = a;
+                                  document.getElementById("" + (i)).innerHTML = b;
+                              }
+                          }, delay * 1000);
+                          await sleep(delay * 1000 + 200);
+                      }
+                  }
+              }
+          }
+          if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+              if (high != (x + 1)) {
+                  let xxx = (high - x - 1) * 50;
+                  let yyy = (-1) * xxx;
+                  first = x + 1;
+                  last = high;
+                  document.getElementById("" + (x + 1)).style.backgroundColor = "yellow";
+                  document.getElementById("" + high).style.backgroundColor = "yellow";
+                  document.getElementById("" + (x + 1)).animate([
+                      // keyframes
+                      {
+                          transform: 'translate(0px,0px)'
+                      }, {
+                          transform: 'translate(0px,50px)'
+                      }, {
+                          transform: `translate(${xxx}px,50px)`
+                      }, {
+                          transform: `translate(${xxx}px,0px)`
+                      }
+                  ], {
+                      // timing options
+                      duration: delay * 1000,
+
+                  });
+                  document.getElementById("" + high).animate([
+                      // keyframes
+                      {
+                          transform: 'translate(0px,0px)'
+                      }, {
+                          transform: 'translate(0px,-50px)'
+                      }, {
+                          transform: `translate(${yyy}px,-50px)`
+                      }, {
+                          transform: `translate(${yyy}px,0px)`
+                      }
+                  ], {
+                      // timing options
+                      duration: delay * 1000,
+
+                  });
+                  setTimeout(function() {
+                      if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+                          document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
+                          document.getElementById("" + (x + 1)).style.backgroundColor = "white";
+                          document.getElementById("" + high).style.backgroundColor = "white";
+                          let a = document.getElementById("" + high).innerHTML;
+                          let b = document.getElementById("" + (x + 1)).innerHTML;
+                          document.getElementById("" + (x + 1)).innerHTML = a;
+                          document.getElementById("" + high).innerHTML = b;
+                      }
+                  }, delay * 1000);
+                  await sleep(delay * 1000 + 200);
+              }
+          }
+          if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+              document.getElementById("" + (x + 1)).style.backgroundColor = "green";
+          }
+          return x + 1;
+      }
+  }
 
 
 
 
+  async function startquicksort(low, high) {
+      if (flag === 1 && sort_algo_index === 3 && reset_clicked === false) {
+          if (low === high) {
+              document.getElementById("" + low).style.backgroundColor = "green";
+          }
+          if (low < high) {
+              let pivot = await partition(low, high);
 
 
-  async function startquicksort() {
-      alert("Insidequick sort");
-      alert(delay);
+
+              await startquicksort(low, pivot - 1);
+
+              await startquicksort(pivot + 1, high);
+
+          }
+      }
   }
 
 
@@ -480,7 +630,7 @@
               }
           case 3:
               {
-                  startquicksort();
+                  startquicksort(0, document.querySelector("#input").value.replace(/^,+|,+$/g, '').split(",").length - 1);
                   break;
               }
           case 4:
@@ -511,6 +661,16 @@
           let obj = {
               target: document.querySelector("#input")
           };
+          if (first !== null) {
+              $("#" + first).stop(true);
+              document.getElementById("" + first).style.backgroundColor = "white";
+              first = null;
+          }
+          if (last !== null) {
+              $("#" + last).stop(true);
+              document.getElementById("" + last).style.backgroundColor = "white";
+              last = null;
+          }
           changeinput(obj);
           document.querySelector(".swaps").innerHTML = "" + 0;
           document.querySelector(".comparisons").innerHTML = "" + 0;
