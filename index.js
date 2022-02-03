@@ -578,15 +578,152 @@
       }
   }
 
+  let check = null;
+
+  function mergeresolveAfter400milliSeconds(a, b, m) {
+      return new Promise(resolve => {
+          if (flag === 1 && sort_algo_index === 4 && reset_clicked === false) {
+              let a_color = 0;
+              let b_color = 0;
+              if (check === m && document.getElementById("" + a).style.backgroundColor === "green") {
+                  a_color = 1;
+              }
+              if (check === m && document.getElementById("" + b).style.backgroundColor === "green") {
+                  b_color = 1;
+              }
+              document.getElementById("" + a).style.backgroundColor = "red";
+              document.getElementById("" + b).style.backgroundColor = "red";
+              setTimeout(() => {
+                  if (a_color === 1) {
+                      document.getElementById("" + a).style.backgroundColor = "green";
+                  } else {
+                      document.getElementById("" + a).style.backgroundColor = "white";
+                  }
+                  if (b_color === 1) {
+                      document.getElementById("" + b).style.backgroundColor = "green";
+                  } else {
+                      document.getElementById("" + b).style.backgroundColor = "white";
+                  }
+                  resolve(parseInt(document.getElementById("" + a).innerHTML) <= parseInt(document.getElementById("" + (b)).innerHTML));
+
+              }, comparisonspeed);
+          }
+      });
+  }
 
 
 
 
+  async function merge(l, m, r) {
+      if (flag === 1 && sort_algo_index === 4 && reset_clicked === false) {
+
+          for (let i = m + 1; i <= r; i++) {
+              for (let j = l; j < i; j++) {
+                  if (await mergeresolveAfter400milliSeconds(i, j, m)) {
+                      if (flag === 1 && sort_algo_index === 4 && reset_clicked === false) {
+
+                          document.querySelector(".comparisons").innerHTML = "" + (parseInt(document.querySelector(".comparisons").innerHTML) + 1);
+                          first = i;
+                          document.getElementById("" + i).style.backgroundColor = "yellow";
+
+                          let x = (j - i) * 50;
+
+                          document.getElementById("" + i).animate([
+                              // keyframes
+                              {
+                                  transform: 'translate(0px,0px)'
+                              }, {
+                                  transform: 'translate(0px,-50px)'
+                              }, {
+                                  transform: `translate(${x}px,-50px)`
+                              }, {
+                                  transform: `translate(${x}px,0px)`
+                              }
+                          ], {
+                              // timing options
+                              duration: delay * 1000,
+
+                          });
+                          for (let k = j; k <= i - 1; k++) {
+                              let xx = 50;
+                              document.getElementById("" + k).animate([
+                                  // keyframes
+                                  {
+                                      transform: 'translate(0px,0px)'
+                                  }, {
+                                      transform: `translate(0px,0px)`
+                                  }, {
+                                      transform: `translate(${xx}px,0px)`
+                                  }, {
+                                      transform: `translate(${xx}px,0px)`
+                                  }
+                              ], {
+                                  // timing options
+                                  duration: delay * 1000,
+
+                              });
+                          }
+                          let aaa = [];
+                          for (let ss = j; ss < i; ss++) {
+                              aaa.push(parseInt(document.getElementById("" + ss).innerHTML));
+                          }
+                          setTimeout(function() {
+                              if (flag === 1 && sort_algo_index === 4 && reset_clicked === false) {
+                                  document.querySelector(".swaps").innerHTML = "" + (parseInt(document.querySelector(".swaps").innerHTML) + 1);
+
+                                  if (check === m) {
+                                      for (let x = 0; x < j; x++) {
+                                          document.getElementById("" + x).style.backgroundColor = "green";
+                                      }
+                                      document.getElementById("" + j).style.backgroundColor = "green";
+                                  } else {
+                                      document.getElementById("" + j).style.backgroundColor = "white";
+                                  }
+                                  document.getElementById("" + i).style.backgroundColor = "white";
+
+                                  let a = document.getElementById("" + (i)).innerHTML;
+
+                                  document.getElementById("" + j).innerHTML = a;
+                                  for (let zz = j + 1; zz <= i; zz++) {
+                                      document.getElementById("" + zz).innerHTML = aaa[zz - j - 1];
+                                  }
+                              }
+                          }, delay * 1000);
+                          await sleep(delay * 1000);
 
 
-  async function startmergesort() {
-      alert("Inside merge sort");
-      alert(delay);
+                          break;
+
+                      }
+                  }
+              }
+          }
+          if (flag === 1 && sort_algo_index === 4 && reset_clicked === false) {
+              if (check === m) {
+
+                  for (let i = 0; i < document.querySelector(".nums").childNodes.length; i++) {
+                      document.getElementById("" + i).style.backgroundColor = "green";
+                      await sleep(100);
+                  }
+              }
+          }
+      }
+  }
+
+
+
+
+  async function startmergesort(l, r) {
+      if (flag === 1 && sort_algo_index === 4 && reset_clicked === false) {
+
+          if (l >= r) {
+              return;
+          }
+          var m = l + Math.floor((r - l) / 2);
+          await startmergesort(l, m);
+          await startmergesort(m + 1, r);
+          await merge(l, m, r);
+      }
   }
 
 
@@ -635,7 +772,8 @@
               }
           case 4:
               {
-                  startmergesort();
+                  startmergesort(0, document.querySelector("#input").value.replace(/^,+|,+$/g, '').split(",").length - 1);
+                  check = 0 + Math.floor((document.querySelector("#input").value.replace(/^,+|,+$/g, '').split(",").length - 1) / 2);
                   break;
 
               }

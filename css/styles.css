@@ -133,3 +133,12 @@ i.icon {
         /* Firefox */
     }
 }
+
+@media (max-width:576px) {
+    .ui.icon.sort {
+        margin-left: 5px;
+    }
+    .ui.icon.reset {
+        margin-left: 5px;
+    }
+}
