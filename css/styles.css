@@ -77,6 +77,14 @@ i.icon {
     display: inline-block;
 }
 
+.ui.segment.foot {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 10;
+    margin: 0px;
+}
+
 
 /*
 .horzx::-webkit-scrollbar {
@@ -102,7 +110,7 @@ i.icon {
     }
     .algorithm {
         overflow-y: scroll;
-        height: 150px;
+        height: 300px;
     }
     .algorithm::-webkit-scrollbar {
         display: none;

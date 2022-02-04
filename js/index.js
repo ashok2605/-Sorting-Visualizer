@@ -789,7 +789,7 @@ $(".ui.icon.reset").on("click", async function(e) {
     if (flag === 1) {
         this.style.opacity = "0.3";
         reset_clicked = true;
-        alert(`Wait for ${delay}sec `);
+        alert(`Wait for ${Math.ceil(delay)}sec `);
 
         await sleep(delay * 1000);
 
