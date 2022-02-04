@@ -72,6 +72,11 @@ i.icon {
     width: 90%;
 }
 
+.tab {
+    width: 20px;
+    display: inline-block;
+}
+
 
 /*
 .horzx::-webkit-scrollbar {
