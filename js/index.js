@@ -9,14 +9,19 @@ let last = null;
 
 $('.ui.icon')
     .popup();
+$('input[type=range]')
+    .popup(
 
+    );
 
 
 
 document.querySelector(".form-range").addEventListener("change", function(e) {
+
     comparisonspeed = 1200 - 200 * (parseInt(e.target.value) / 800);
 
     delay = (4800 - parseInt(e.target.value)) / 1000;
+    document.querySelector('.ui.segment.speed').innerHTML = (parseInt(e.target.value) / 800) + 'x';
 });
 
 

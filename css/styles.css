@@ -3,6 +3,10 @@ body {
     background-color: white;
 }
 
+.ui.segment.speed {
+    display: inline-block;
+}
+
 .ui.header {
     padding: 8px;
     padding-left: 10.5px;
@@ -35,6 +39,7 @@ body {
 i.icon {
     margin-left: 5px;
     font-size: 1.4rem;
+    margin-right: 3.5px;
 }
 
 .eRnhep {
@@ -148,6 +153,9 @@ i.icon {
 }
 
 @media (max-width:576px) {
+    .ui.segment.speed {
+        display: none;
+    }
     .ui.icon.sort {
         margin-left: 5px;
     }
